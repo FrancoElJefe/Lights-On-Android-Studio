@@ -10,7 +10,8 @@
         android:layout_width="405dp"
         android:layout_height="693dp"
         tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints">
 
         <Button
             android:id="@+id/Encender"
@@ -21,7 +22,7 @@
             android:layout_marginBottom="32dp"
             android:background="@android:color/holo_green_dark"
             android:onClick="EncenderLuz"
-            android:text="Encender"
+            android:text="@string/Btn_Encender"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/apagar"
@@ -36,7 +37,7 @@
             android:layout_marginBottom="32dp"
             android:background="@android:color/holo_red_dark"
             android:onClick="ApagarLuz"
-            android:text="APAGAR"
+            android:text="@string/Btn_Apagar"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -49,7 +50,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="184dp"
             android:background="@android:color/holo_purple"
-            android:text="TIMER"
+            android:text="@string/Btn_TIMER"
             android:onClick="SetTimer"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -64,7 +65,7 @@
             android:layout_marginTop="28dp"
             android:layout_marginEnd="8dp"
             android:background="@android:color/darker_gray"
-            android:text="Lights On"
+            android:text="@string/App_LightsON"
             android:textColor="@android:color/white"
             android:textSize="30sp"
             android:textStyle="italic"
@@ -92,7 +93,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="52dp"
             android:layout_marginEnd="8dp"
-            android:text="1m"
+            android:text="@string/App_1m"
             android:textColor="@android:color/holo_purple"
             android:textAlignment="center"
             android:textSize="30sp"
@@ -101,4 +102,5 @@
             app:layout_constraintStart_toEndOf="@+id/BarraTimer"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
     </android.support.constraint.ConstraintLayout>
+
 </android.support.constraint.ConstraintLayout>

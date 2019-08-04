@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">HTTPprueba</string>
+    <string name="App_1m">1min</string>
+    <string name="App_LightsON">Lights On</string>
+    <string name="Btn_Encender">ENCENDER</string>
+    <string name="Btn_Apagar">APAGAR</string>
+    <string name="Btn_TIMER">TIMER</string>
 </resources>
