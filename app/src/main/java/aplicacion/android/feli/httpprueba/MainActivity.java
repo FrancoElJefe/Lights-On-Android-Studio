@@ -173,3 +173,7 @@ public class MainActivity extends AppCompatActivity {
 
 }
 
+
+//****************Si no te instala la aplicacion ya que te pone Installation failed with message Failed to finalize session : INSTALL_FAILED_INVALID_APK: **********//
+
+//Build->Rebuild Proyect
