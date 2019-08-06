@@ -43,16 +43,11 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
-        SharedPreferences myPreference = PreferenceManager.getDefaultSharedPreferences(MainActivity.this); // esto sirve para declarar el archivo preferencial, donde se guardan datos en la memoria
-        Usuario = myPreference.getString("Usuario","unknown");
-        Contra = myPreference.getString("Contra","unknown");
-
-
         BarraTimer.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 numero = i+1;
-                String display = Integer.toString(numero) + "m";
+                String display = Integer.toString(numero) + "min";
                 Minutos.setText(display);
             }
 
@@ -93,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void EncenderLuz(View v) {
 
+        SharedPreferences myPreference = PreferenceManager.getDefaultSharedPreferences(MainActivity.this); // esto sirve para declarar el archivo preferencial, donde se guardan datos en la memoria
+        Usuario = myPreference.getString("Usuario","unknown");
+        Contra = myPreference.getString("Contra","unknown");
+
         String LedOn = "LED=ON";
 
         OkHttpClient client = new OkHttpClient();
@@ -112,19 +111,7 @@ public class MainActivity extends AppCompatActivity {
                     MainActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                           char [] array = myResponse.toCharArray(); //convierto el string en array de caracteres asi lo puedo recorrer
-
-                           for (int i = 0 ; i < array.length;i++){ //recorro el array hasta encontrar la 'O' mayuscula y luego me fijo si en el siguente
-                               if (array[i] == 'O'){               //caracter hay una 'N' o 'F'
-                                   if (array[i+1] == 'N'){
-                                       DisplayEstadoLed.setText(LightsOn);
-                                       break;
-                                   }else if (array[i+1] == 'F'){
-                                       DisplayEstadoLed.setText(LightsOff);
-                                       break;
-                                   }
-                               }
-                           }
+                            DisplayEstadoLed.setText(LightsOn);
                         }
                     });
                 }
@@ -134,8 +121,15 @@ public class MainActivity extends AppCompatActivity {
     }//public void EncenderLuz(View v)
 
     public void ApagarLuz(View v){
+
+        SharedPreferences myPreference = PreferenceManager.getDefaultSharedPreferences(MainActivity.this); // esto sirve para declarar el archivo preferencial, donde se guardan datos en la memoria
+        Usuario = myPreference.getString("Usuario","unknown");
+        Contra = myPreference.getString("Contra","unknown");
+
+        String LedOff = "LED=OFF";
+
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url("http://192.168.0.28/LED=OFF").build();
+        Request request = new Request.Builder().url(URL+LedOff).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
@@ -151,19 +145,7 @@ public class MainActivity extends AppCompatActivity {
                     MainActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            char [] array = myResponse.toCharArray(); //convierto el string en array de caracteres asi lo puedo recorrer
-
-                            for (int i = 0 ; i < array.length;i++){ //recorro el array hasta encontrar la 'O' mayuscula y luego me fijo si en el siguente
-                                if (array[i] == 'O'){               //caracter hay una 'N' o 'F'
-                                    if (array[i+1] == 'N'){
-                                        DisplayEstadoLed.setText(LightsOn);
-                                        break;
-                                    }else if (array[i+1] == 'F'){
-                                        DisplayEstadoLed.setText(LightsOff);
-                                        break;
-                                    }
-                                }
-                            }
+                          DisplayEstadoLed.setText(LightsOff);
                         }
                     });
                 }

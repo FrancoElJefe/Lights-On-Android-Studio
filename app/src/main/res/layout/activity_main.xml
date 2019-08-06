@@ -57,7 +57,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="184dp"
-            android:background="@android:color/holo_purple"
+            android:background="@color/ic_launcher_background_timer"
+            android:drawableLeft="@mipmap/timer"
             android:onClick="SetTimer"
             android:text="@string/Btn_TIMER"
             android:textColor="@android:color/white"
@@ -96,8 +97,8 @@
 
         <TextView
             android:id="@+id/DispTimer"
-            android:layout_width="51dp"
-            android:layout_height="50dp"
+            android:layout_width="78dp"
+            android:layout_height="49dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="68dp"
             android:layout_marginEnd="8dp"
