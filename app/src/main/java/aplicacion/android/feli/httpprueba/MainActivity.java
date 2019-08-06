@@ -1,11 +1,14 @@
 package aplicacion.android.feli.httpprueba;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 
 import com.squareup.okhttp.Callback;
@@ -24,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
     String SinConexion = "Sin Conexion";
     String LightsOn = "Lights ON";
     String LightsOff = "Lights OFF";
+    String URL = "http://192.168.0.28/";
+    String Usuario = "";
+    String Contra = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
         Minutos = findViewById(R.id.DispTimer);
         DisplayEstadoLed = findViewById(R.id.textView);
         BarraTimer = findViewById(R.id.BarraTimer);
+        Toolbar toolbar = findViewById(R.id.ToolBar);
+
+        //setSupportActionBar(toolbar);
+
+        SharedPreferences myPreference = PreferenceManager.getDefaultSharedPreferences(MainActivity.this); // esto sirve para declarar el archivo preferencial, donde se guardan datos en la memoria
+        Usuario = myPreference.getString("Usuario","unknown");
+        Contra = myPreference.getString("Contra","unknown");
+
 
         BarraTimer.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -58,8 +72,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void EncenderLuz(View v) {
 
+        String LedOn = "LED=ON";
+
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url("http://192.168.0.28/LED=ON").build();
+        Request request = new Request.Builder().url(URL+LedOn).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {

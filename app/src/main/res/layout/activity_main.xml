@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
     <android.support.constraint.ConstraintLayout
-        android:layout_width="405dp"
-        android:layout_height="693dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="0dp"
-        tools:ignore="MissingConstraints">
+        tools:layout_editor_absoluteY="0dp">
+
+        <include
+            android:id="@+id/ToolBar"
+            android:layout="@layout/toolbar"/>
 
         <Button
             android:id="@+id/Encender"
@@ -50,8 +60,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="184dp"
             android:background="@android:color/holo_purple"
-            android:text="@string/Btn_TIMER"
             android:onClick="SetTimer"
+            android:text="@string/Btn_TIMER"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,14 +72,14 @@
             android:layout_width="333dp"
             android:layout_height="93dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="80dp"
             android:layout_marginEnd="8dp"
             android:background="@android:color/darker_gray"
             android:text="@string/App_LightsON"
+            android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="30sp"
             android:textStyle="italic"
-            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -80,7 +90,7 @@
             android:layout_width="265dp"
             android:layout_height="52dp"
             android:layout_marginStart="36dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="68dp"
             android:max="3"
             android:progress="0"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,16 +101,19 @@
             android:layout_width="51dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="68dp"
             android:layout_marginEnd="8dp"
             android:text="@string/App_1m"
-            android:textColor="@android:color/holo_purple"
             android:textAlignment="center"
+            android:textColor="@android:color/holo_purple"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.034"
             app:layout_constraintStart_toEndOf="@+id/BarraTimer"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+
     </android.support.constraint.ConstraintLayout>
 
-</android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>
