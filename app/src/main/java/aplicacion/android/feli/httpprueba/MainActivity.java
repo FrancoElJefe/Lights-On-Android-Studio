@@ -9,13 +9,10 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
-
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {

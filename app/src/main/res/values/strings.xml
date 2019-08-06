@@ -6,4 +6,6 @@
     <string name="Btn_Apagar">APAGAR</string>
     <string name="Btn_TIMER">TIMER</string>
     <string name="OpcSettings">Opciones</string>
+    <string name="Usuario">Usuario</string>
+    <string name="Contraseña">Contraseña</string>
 </resources>
