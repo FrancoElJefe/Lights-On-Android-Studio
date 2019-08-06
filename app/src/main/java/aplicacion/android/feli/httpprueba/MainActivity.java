@@ -4,11 +4,11 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MenuInflater;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 
 import com.squareup.okhttp.Callback;
@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView DisplayEstadoLed;
     private TextView Minutos;
+    private Toolbar toolbar;
     SeekBar BarraTimer;
     int numero = 1;
     String SinConexion = "Sin Conexion";
@@ -39,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
         Minutos = findViewById(R.id.DispTimer);
         DisplayEstadoLed = findViewById(R.id.textView);
         BarraTimer = findViewById(R.id.BarraTimer);
-        Toolbar toolbar = findViewById(R.id.ToolBar);
 
-        //setSupportActionBar(toolbar);
+        toolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(toolbar);
 
         SharedPreferences myPreference = PreferenceManager.getDefaultSharedPreferences(MainActivity.this); // esto sirve para declarar el archivo preferencial, donde se guardan datos en la memoria
         Usuario = myPreference.getString("Usuario","unknown");
@@ -69,6 +70,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     }//protected void onCreate(Bundle savedInstanceState)
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return true;
+    }
+
+
 
     public void EncenderLuz(View v) {
 

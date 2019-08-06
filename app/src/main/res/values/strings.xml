@@ -5,4 +5,5 @@
     <string name="Btn_Encender">ENCENDER</string>
     <string name="Btn_Apagar">APAGAR</string>
     <string name="Btn_TIMER">TIMER</string>
+    <string name="OpcSettings">Opciones</string>
 </resources>
