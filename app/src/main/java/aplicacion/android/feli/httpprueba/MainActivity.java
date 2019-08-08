@@ -1,5 +1,6 @@
 package aplicacion.android.feli.httpprueba;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -18,6 +19,9 @@ import com.squareup.okhttp.Response;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
+
+    private SharedPreferences myPreference;
+    private SharedPreferences.Editor myEditor;
 
     private TextView DisplayEstadoLed;
     private TextView Minutos;
@@ -42,6 +46,24 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
+
+        Bundle bundle = getIntent().getExtras(); //esto uso para mandar los datos de usuario y contra desde la activity opciones a la mainActivity
+        if (bundle != null){
+            Usuario = bundle.getString("usuario");
+            Contra = bundle.getString("contra");
+
+            myEditor = myPreference.edit();//ni bien los paso, los guardo
+            myEditor.putString("Usuario",Usuario);
+            myEditor.apply();
+
+            myEditor.putString("Contra",Contra);
+            myEditor.apply();
+
+        }else{
+            myPreference = PreferenceManager.getDefaultSharedPreferences(MainActivity.this); // esto sirve para declarar el archivo preferencial, donde se guardan datos en la memoria
+            Usuario = myPreference.getString("Usuario","unknown");
+            Contra = myPreference.getString("Contra","unknown");
+        }
 
         BarraTimer.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -88,14 +110,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void EncenderLuz(View v) {
 
-        SharedPreferences myPreference = PreferenceManager.getDefaultSharedPreferences(MainActivity.this); // esto sirve para declarar el archivo preferencial, donde se guardan datos en la memoria
-        Usuario = myPreference.getString("Usuario","unknown");
-        Contra = myPreference.getString("Contra","unknown");
-
         String LedOn = "LED=ON";
 
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(URL+LedOn).build();
+        Request request = new Request.Builder().url(URL+LedOn+"/"+Usuario+"/"+Contra).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
@@ -122,14 +140,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void ApagarLuz(View v){
 
-        SharedPreferences myPreference = PreferenceManager.getDefaultSharedPreferences(MainActivity.this); // esto sirve para declarar el archivo preferencial, donde se guardan datos en la memoria
-        Usuario = myPreference.getString("Usuario","unknown");
-        Contra = myPreference.getString("Contra","unknown");
-
         String LedOff = "LED=OFF";
 
         OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder().url(URL+LedOff).build();
+        Request request = new Request.Builder().url(URL+LedOff+"/"+Usuario+"/"+Contra).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
