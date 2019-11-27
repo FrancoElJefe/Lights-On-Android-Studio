@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //SetTimer(v);
+                SetTimer(v);
 
                 if (BtnTimmer.isSelected()) {
                     BtnTimmer.setSelected(false);

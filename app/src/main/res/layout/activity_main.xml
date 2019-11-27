@@ -25,30 +25,32 @@
             android:id="@+id/Encender"
             android:layout_width="174dp"
             android:layout_height="136dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="24dp"
             android:background="@android:color/holo_green_dark"
             android:onClick="EncenderLuz"
             android:text="@string/Btn_Encender"
             android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/apagar"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintBottom_toTopOf="@+id/apagar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/apagar"
             android:layout_width="174dp"
             android:layout_height="136dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="64dp"
             android:background="@android:color/holo_red_dark"
             android:onClick="ApagarLuz"
             android:text="@string/Btn_Apagar"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView"
@@ -90,7 +92,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="318dp"
         android:layout_marginTop="227dp"
-        android:onClick="SetTimer"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="81dp"
