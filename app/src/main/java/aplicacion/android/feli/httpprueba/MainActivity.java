@@ -1,5 +1,7 @@
 package aplicacion.android.feli.httpprueba;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +19,7 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import java.io.IOException;
+import xyz.hanks.library.bang.SmallBangView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences.Editor myEditor;
 
     private TextView DisplayEstadoLed;
-    private TextView Minutos;
     private Toolbar toolbar;
     SeekBar BarraTimer;
     int numero = 1;
@@ -40,9 +42,35 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Minutos = findViewById(R.id.DispTimer);
+
+/**************************** animacion **********************************************/
+        final SmallBangView BtnTimmer = findViewById(R.id.btn_timmer);
+        BtnTimmer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //SetTimer(v);
+
+                if (BtnTimmer.isSelected()) {
+                    BtnTimmer.setSelected(false);
+                } else {
+                    BtnTimmer.setSelected(true);
+                    BtnTimmer.likeAnimation(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                        }
+                    });
+                }
+            }
+        });
+
+/************************************************************************************/
+
         DisplayEstadoLed = findViewById(R.id.textView);
         BarraTimer = findViewById(R.id.BarraTimer);
+
+
 
         toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
@@ -69,8 +97,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 numero = i+1;
-                String display = Integer.toString(numero) + "min";
-                Minutos.setText(display);
+                String display = "Set Timer en " + Integer.toString(numero) + "min";
+                DisplayEstadoLed.setText(display);
             }
 
             @Override
@@ -85,7 +113,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+
+
     }//protected void onCreate(Bundle savedInstanceState)
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -124,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Response response) throws IOException {
                 if (response.isSuccessful()){
-                   final String myResponse = response.body().string();
+                   //final String myResponse = response.body().string();
 
                     MainActivity.this.runOnUiThread(new Runnable() {
                         @Override
@@ -154,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Response response) throws IOException {
                 if (response.isSuccessful()){
-                    final String myResponse = response.body().string();
+                    //final String myResponse = response.body().string();
 
                     MainActivity.this.runOnUiThread(new Runnable() {
                         @Override

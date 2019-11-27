@@ -50,28 +50,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <Button
-            android:id="@+id/timer"
-            android:layout_width="377dp"
-            android:layout_height="82dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="184dp"
-            android:background="@color/ic_launcher_background_timer"
-            android:drawableLeft="@mipmap/timer"
-            android:onClick="SetTimer"
-            android:text="@string/Btn_TIMER"
-            android:textColor="@android:color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="333dp"
             android:layout_height="93dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="84dp"
             android:layout_marginEnd="8dp"
             android:background="@android:color/darker_gray"
             android:text="@string/App_LightsON"
@@ -95,24 +79,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-        <TextView
-            android:id="@+id/DispTimer"
-            android:layout_width="78dp"
-            android:layout_height="49dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="68dp"
-            android:layout_marginEnd="8dp"
-            android:text="@string/App_1m"
-            android:textAlignment="center"
-            android:textColor="@android:color/holo_purple"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.034"
-            app:layout_constraintStart_toEndOf="@+id/BarraTimer"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
-
 
     </android.support.constraint.ConstraintLayout>
+
+    <xyz.hanks.library.bang.SmallBangView
+        android:id="@+id/btn_timmer"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="318dp"
+        android:layout_marginTop="227dp"
+        android:onClick="SetTimer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="81dp"
+        tools:layout_editor_absoluteY="350dp">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@mipmap/timer"
+            android:text="Hello World!" />
+    </xyz.hanks.library.bang.SmallBangView>
+
 
 
 </RelativeLayout>
