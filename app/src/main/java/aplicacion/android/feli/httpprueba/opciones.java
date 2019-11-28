@@ -8,16 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 public class opciones extends AppCompatActivity {
 
-    private String Usuario = "";
-    private String Contra = "";
     private EditText TextoUsuario;
     private EditText TextoContra;
     private SharedPreferences myPreference;
     private SharedPreferences.Editor myEditor;
+    private Switch SetSensAprox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,31 +26,31 @@ public class opciones extends AppCompatActivity {
 
         TextoUsuario = findViewById(R.id.UsuarioPT);
         TextoContra = findViewById(R.id.ContraPT);
+        SetSensAprox = findViewById(R.id.SwitchSensor);
 
-        myPreference = PreferenceManager.getDefaultSharedPreferences(opciones.this); // esto sirve para declarar el archivo preferencial, donde se guardan datos en la memoria
-        Usuario = myPreference.getString("Usuario","unknown");
-        Contra = myPreference.getString("Contra","unknown");
-
-        TextoUsuario.setText(Usuario);
-        TextoContra.setText(Contra);
+        TextoUsuario.setText(MainActivity.Usuario);
+        TextoContra.setText(MainActivity.Contra);
+        SetSensAprox.setChecked(MainActivity.OnOffSensor);
 
     }
 
     public void SetUsuarioyContra(View view){
 
-        myEditor = myPreference.edit();
-
-        myEditor.putString("Usuario", TextoUsuario.getText().toString());
-        myEditor.apply();
-
-        myEditor.putString("Usuario", TextoUsuario.getText().toString());
-        myEditor.apply();
+        MainActivity.Usuario = TextoUsuario.getText().toString();
+        MainActivity.Contra = TextoContra.getText().toString();
 
         Intent intent = new Intent(opciones.this,MainActivity.class);
-        intent.putExtra("usuario",Usuario);
-        intent.putExtra("contra",Contra);
         startActivity(intent);
 
     }
+
+    public  void SetSensor(View v){
+        if(SetSensAprox.isChecked()){ MainActivity.OnOffSensor = true; }else MainActivity.OnOffSensor = false;
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+
 }
 
