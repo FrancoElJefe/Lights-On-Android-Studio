@@ -34,33 +34,63 @@ import xyz.hanks.library.bang.SmallBangView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private boolean inicio = false;
     public  String CHANNEL_ID =  "Notificacion";
     private TextView DisplayEstadoLed;
     private Toolbar toolbar;
     SeekBar BarraTimer;
-    int numero = 1;
+    private int numero = 1;
     String SinConexion = "Sin Conexion";
     String LightsOn = "Lights ON";
     String LightsOff = "Lights OFF";
     String URL = "http://192.168.0.28/";
     public static String Usuario;
     public static String Contra;
-    int estado = 0;
     boolean OnOff = false;
     public static boolean OnOffSensor;
 
-    private SensorManager sensorManager;
-    private Sensor proximity;
-    private SensorEventListener sensorEventListener;
+    public static SensorManager sensorManager;
+    public static Sensor proximity;
+    public static SensorEventListener sensorEventListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if(!inicio){
 
+
+            sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+            proximity = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);//este va siempre despues del sensorManager
+
+            sensorEventListener = new SensorEventListener() {
+                @Override
+                public void onSensorChanged(SensorEvent sensorEvent) {// Do something with this sensor data.
+                    Float distance = sensorEvent.values[0];
+
+                    if(distance == 0){
+                        if(!OnOff){
+                            EncenderLuzSensorDeAproximacion();
+                        }else {
+                            ApagarLuzSensorDeAproximacion();
+                        }
+                    }
+
+                }
+
+                @Override
+                public void onAccuracyChanged(Sensor sensor, int i) {
+
+                }
+
+            };
+            sensorManager.unregisterListener(sensorEventListener);
+            inicio = true;
+        }
 
 /**************************** animacion **********************************************/
+
         final SmallBangView BtnTimmer = findViewById(R.id.btn_timmer);
         BtnTimmer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,20 +120,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
 
-        /*
-        SharedPreferences myPreferencest = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        SharedPreferences.Editor myEditor = myPreferencest.edit();
-        myEditor.putBoolean("EstadoSwitch",OnOffSensor);
-        myEditor.apply();
-
-
-        SharedPreferences myPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this); // esto sirve para declarar el archivo preferencial, donde se guardan datos en la memoria
-        Usuario = myPreferences.getString("Usuario","unknown");
-        Contra = myPreferences.getString("Contra","unknown");
-        if(myPreferences.contains("EstadoSwitch"))
-        OnOffSensor = myPreferences.getBoolean("EstadoSwitch",false);
-*/
-
         BarraTimer.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -123,39 +139,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /******************** Seteo el sensor de aproximacion*******************************/
-
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        proximity = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-
-        sensorEventListener = new SensorEventListener() {
-            @Override
-            public void onSensorChanged(SensorEvent sensorEvent) {// Do something with this sensor data.
-                Float distance = sensorEvent.values[0];
-
-                if(distance == 0){
-                    if(!OnOff){
-                        EncenderLuzSensorDeAproximacion();
-                    }else {
-                        ApagarLuzSensorDeAproximacion();
-                    }
-                }
-
-            }
-
-            @Override
-            public void onAccuracyChanged(Sensor sensor, int i) {
-
-            }
-
-        };
-
-
-        if(OnOffSensor){ sensorManager.registerListener(sensorEventListener, proximity, SensorManager.SENSOR_DELAY_NORMAL);//activo el sensor
-        }else if(!OnOffSensor){sensorManager.unregisterListener(sensorEventListener);}//desactivo el sensor
-
-
-        /***********************************************************************************/
 
 
 
@@ -342,13 +325,14 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Response response) throws IOException {
                 if (response.isSuccessful()){
                     //final String myResponse = response.body().string();
-
+                    DisplayEstadoLed.setText(LightsOn);
+                    /*
                     MainActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            DisplayEstadoLed.setText(LightsOn);
+
                         }
-                    });
+                    });*/
                 }
             }
         });
@@ -375,17 +359,26 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Response response) throws IOException {
                 if (response.isSuccessful()){
                     //final String myResponse = response.body().string();
-
+                    DisplayEstadoLed.setText(LightsOff);
+                    /*
                     MainActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             DisplayEstadoLed.setText(LightsOff);
                         }
-                    });
+                    });*/
                 }
             }
         });
 
+    }
+
+    public void EncenderSensor(){
+        sensorManager.registerListener(sensorEventListener, proximity, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    public void ApagarSensor(){
+        sensorManager.unregisterListener(sensorEventListener);
     }
 
 
